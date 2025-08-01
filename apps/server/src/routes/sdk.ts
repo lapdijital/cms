@@ -142,8 +142,8 @@ router.get('/lap-cms.js', (req, res) => {
     /**
      * Load single post
      */
-    loadPost: function(postId) {
-      return this.request(\`/sdk/posts/\${postId}\`, {
+    loadPost: function(slug) {
+      return this.request(\`/sdk/posts/\${slug}\`, {
         method: 'GET'
       });
     },
@@ -306,13 +306,13 @@ router.get('/posts', async (req, res) => {
     });
   }
 });// Get single post for SDK
-router.get('/posts/:id', async (req, res) => {
+router.get('/posts/:slug', async (req, res) => {
   try {
     const { site } = req;
-    const { id } = req.params;
+    const { slug } = req.params;
 
     // Get published post using PostsModel
-    const post = await PostsModel.findPublishedById(id);
+    const post = await PostsModel.findPublishedById(slug);
 
     if (!post) {
       return res.status(404).json({

@@ -89,13 +89,13 @@ export class PostsModel {
     }
 
     // Find published post by ID or slug (for public access)
-    static async findPublishedById(id: string): Promise<PostWithRelations | null> {
+    static async findPublishedById(slug: string): Promise<PostWithRelations | null> {
         try {
             return await prisma.post.findFirst({
                 where: {
                     OR: [
-                        { id },
-                        { slug: id }
+                        { slug },
+                        { slug }
                     ],
                     status: PostStatus.PUBLISHED,
                     publishedAt: {
