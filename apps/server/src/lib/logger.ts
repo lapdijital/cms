@@ -2,9 +2,6 @@ import path from 'path';
 import winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 
-// CommonJS compatible __dirname
-const __dirname = process.cwd();
-
 // Log levels
 const levels = {
   error: 0,
