@@ -59,7 +59,7 @@ cms/
 
 ### 1. Depoyu klonlayın
 ```bash
-git clone https://github.com/username/cms.git
+git clone https://github.com/lapdijital/cms.git
 cd cms
 ```
 
