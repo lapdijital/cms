@@ -400,7 +400,7 @@ function PostEditor({ post, onBack, siteName }: PostEditorProps) {
       // API'ye kaydet
       const url = post?.id
         ? `${process.env.NEXT_PUBLIC_API_URL}/posts/${post.id}`
-        : `${process.env.NEXT_PUBLIC_API_URL}:3003/posts`;
+        : `${process.env.NEXT_PUBLIC_API_URL}/posts`;
 
       const method = post?.id ? "PUT" : "POST";
 
