@@ -278,8 +278,7 @@ function PostEditor({ post, onBack, siteName }: PostEditorProps) {
               class: ImageTool,
               config: {
                 endpoints: {
-                  byFile:
-                    "http://localhost:3003/api/upload/upload-image-editorjs",
+                  byFile: `${process.env.NEXT_PUBLIC_API_URL}/api/upload/upload-image-editorjs`,
                 },
                 field: "image",
                 types: "image/*",
@@ -400,8 +399,8 @@ function PostEditor({ post, onBack, siteName }: PostEditorProps) {
 
       // API'ye kaydet
       const url = post?.id
-        ? `http://localhost:3003/posts/${post.id}`
-        : "http://localhost:3003/posts";
+        ? `${process.env.NEXT_PUBLIC_API_URL}/posts/${post.id}`
+        : `${process.env.NEXT_PUBLIC_API_URL}:3003/posts`;
 
       const method = post?.id ? "PUT" : "POST";
 
@@ -445,7 +444,7 @@ function PostEditor({ post, onBack, siteName }: PostEditorProps) {
 
     try {
       const response = await fetch(
-        "http://localhost:3003/api/upload/upload-image",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/upload/upload-image`,
         {
           method: "POST",
           body: formData,
@@ -1064,7 +1063,7 @@ function PostsPageContent() {
   const fetchPosts = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3003/posts/my", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/my`, {
         credentials: "include",
       });
 
@@ -1127,7 +1126,7 @@ function PostsPageContent() {
     }
 
     try {
-      const response = await fetch(`http://localhost:3003/posts/${post.id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${post.id}`, {
         method: "DELETE",
         credentials: "include",
       });

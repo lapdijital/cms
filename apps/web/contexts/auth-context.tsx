@@ -52,7 +52,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAuthStatus = async () => {
     try {
-      const response = await fetch('http://localhost:3003/auth/me', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
         credentials: 'include',
       });
 
@@ -69,7 +69,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };  const login = async (email: string, password: string) => {
     try {
-      const response = await fetch('http://localhost:3003/auth/login', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = async () => {
     try {
-      await fetch('http://localhost:3003/auth/logout', {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
         method: 'POST',
         credentials: 'include',
       });
@@ -113,7 +113,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const fetchActivities = async (): Promise<Activity[]> => {
     try {
-      const response = await fetch('http://localhost:3003/users/activities', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/activities`, {
         credentials: 'include',
       });
 

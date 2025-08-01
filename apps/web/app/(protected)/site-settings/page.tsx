@@ -8,14 +8,14 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useAuth } from "@/contexts/auth-context"
 import {
-    AlertTriangle,
-    Code,
-    Copy,
-    ExternalLink,
-    Globe,
-    Key,
-    RefreshCw,
-    Settings
+  AlertTriangle,
+  Code,
+  Copy,
+  ExternalLink,
+  Globe,
+  Key,
+  RefreshCw,
+  Settings
 } from "lucide-react"
 import { useEffect, useState } from "react"
 
@@ -57,8 +57,8 @@ export default function SiteSettingsPage() {
         setError("Site adı gereklidir")
         return
       }
-      
-      const response = await fetch('http://localhost:3003/api/users/update-site', {
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/update-site`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json'
@@ -111,8 +111,8 @@ export default function SiteSettingsPage() {
         setError("Yeni şifre en az 6 karakter olmalıdır")
         return
       }
-      
-      const response = await fetch('http://localhost:3003/api/users/update/password', {
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/update/password`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json'
@@ -152,8 +152,8 @@ export default function SiteSettingsPage() {
     
     try {
       setError("")
-      
-      const response = await fetch('http://localhost:3003/api/users/regenerate-api-key', {
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/regenerate-api-key`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json'
