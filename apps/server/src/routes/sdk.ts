@@ -1,5 +1,6 @@
 import express from 'express';
 import { handleCorsOptions, validateDomainCors } from '../middleware/corsValidation.js';
+import { PostsModel } from '../models/Posts.js';
 
 const router = express.Router();
 
@@ -251,40 +252,54 @@ router.get('/posts', async (req, res) => {
         const { site } = req;
         const limit = parseInt(req.query.limit as string) || 10;
         const page = parseInt(req.query.page as string) || 1;
-        const offset = (page - 1) * limit;
+        const category = req.query.category as string;
+        const tag = req.query.tag as string;
 
-        // TODO: Implement posts fetching with site filtering
-        // For now, return mock data
-        const mockPosts = [
-            {
-                id: '1',
-                title: 'Örnek Blog Yazısı',
-                excerpt: 'Bu bir örnek blog yazısının özeti...',
-                publishedAt: new Date().toISOString(),
-                author: {
-                    name: 'Yazar Adı'
-                }
+        // Get published posts using PostsModel
+        const result = await PostsModel.findPublishedPosts(
+            category,
+            tag,
+            page,
+            limit
+        );
+
+        // Format posts for SDK response
+        const formattedPosts = result.posts.map(post => ({
+            id: post.id,
+            title: post.title,
+            slug: post.slug,
+            excerpt: post.excerpt,
+            content: post.content ? JSON.parse(post.content) : null,
+            featuredImage: post.featuredImage,
+            publishedAt: post.publishedAt,
+            createdAt: post.createdAt,
+            updatedAt: post.updatedAt,
+            author: {
+                id: post.author.id,
+                name: post.author.name
             },
-            {
-                id: '2',
-                title: 'İkinci Blog Yazısı',
-                excerpt: 'İkinci yazının özeti burada yer alıyor...',
-                publishedAt: new Date(Date.now() - 86400000).toISOString(),
-                author: {
-                    name: 'Başka Yazar'
-                }
+            categories: post.categories,
+            tags: post.tags,
+            commentsCount: post._count?.comments || 0,
+            seo: {
+                metaTitle: post.metaTitle,
+                metaDescription: post.metaDescription,
+                keywords: post.metaKeywords,
+                canonicalUrl: post.canonicalUrl,
+                ogTitle: post.ogTitle,
+                ogDescription: post.ogDescription,
+                ogImage: post.ogImage,
+                twitterTitle: post.twitterTitle,
+                twitterDescription: post.twitterDescription,
+                noIndex: post.noIndex,
+                noFollow: post.noFollow,
             }
-        ];
+        }));
 
         res.json({
             success: true,
-            posts: mockPosts,
-            pagination: {
-                page,
-                limit,
-                total: mockPosts.length,
-                pages: Math.ceil(mockPosts.length / limit)
-            },
+            posts: formattedPosts,
+            pagination: result.pagination,
             site: {
                 name: site.name,
                 domain: site.domain
@@ -298,32 +313,58 @@ router.get('/posts', async (req, res) => {
             message: 'Failed to fetch posts'
         });
     }
-});
-
-// Get single post for SDK
+});// Get single post for SDK
 router.get('/posts/:id', async (req, res) => {
     try {
         const { site } = req;
         const { id } = req.params;
 
-        // TODO: Implement single post fetching
-        const mockPost = {
-            id,
-            title: 'Detaylı Blog Yazısı',
-            content: '<p>Bu yazının tam içeriği burada yer alıyor...</p>',
-            excerpt: 'Yazının özeti...',
-            publishedAt: new Date().toISOString(),
+        // Get published post using PostsModel
+        const post = await PostsModel.findPublishedById(id);
+
+        if (!post) {
+            return res.status(404).json({
+                error: 'Post not found',
+                message: 'The requested post was not found or is not published'
+            });
+        }
+
+        // Format post for SDK response
+        const formattedPost = {
+            id: post.id,
+            title: post.title,
+            slug: post.slug,
+            excerpt: post.excerpt,
+            content: post.content ? JSON.parse(post.content) : null,
+            featuredImage: post.featuredImage,
+            publishedAt: post.publishedAt,
+            createdAt: post.createdAt,
+            updatedAt: post.updatedAt,
             author: {
-                name: 'Yazar Adı',
-                avatar: null
+                id: post.author.id,
+                name: post.author.name
             },
-            categories: ['Teknoloji', 'Web Tasarım'],
-            tags: ['JavaScript', 'CMS']
+            categories: post.categories,
+            tags: post.tags,
+            commentsCount: post._count?.comments || 0,
+            seo: {
+                metaTitle: post.metaTitle,
+                metaDescription: post.metaDescription,
+                keywords: post.metaKeywords,
+                canonicalUrl: post.canonicalUrl,
+                ogTitle: post.ogTitle,
+                ogDescription: post.ogDescription,
+                ogImage: post.ogImage,
+                twitterTitle: post.twitterTitle,
+                twitterDescription: post.twitterDescription,
+                noIndex: post.noIndex,
+                noFollow: post.noFollow,
+            }
         };
 
         res.json({
             success: true,
-            post: mockPost,
+            post: formattedPost,
             site: {
                 name: site.name,
                 domain: site.domain
@@ -335,6 +376,77 @@ router.get('/posts/:id', async (req, res) => {
         res.status(500).json({
             error: 'Internal server error',
             message: 'Failed to fetch post'
+        });
+    }
+});
+
+// Search posts for SDK
+router.get('/search', handleCorsOptions, validateDomainCors, async (req, res) => {
+    try {
+        const { site } = req;
+        const query = req.query.q as string;
+        const limit = parseInt(req.query.limit as string) || 10;
+        const page = parseInt(req.query.page as string) || 1;
+
+        if (!query) {
+            return res.status(400).json({
+                error: 'Search query is required',
+                message: 'Please provide a search query using the "q" parameter'
+            });
+        }
+
+        // Search published posts using PostsModel
+        const result = await PostsModel.searchPosts(query, page, limit, true);
+
+        // Format posts for SDK response
+        const formattedPosts = result.posts.map(post => ({
+            id: post.id,
+            title: post.title,
+            slug: post.slug,
+            excerpt: post.excerpt,
+            content: post.content ? JSON.parse(post.content) : null,
+            featuredImage: post.featuredImage,
+            publishedAt: post.publishedAt,
+            createdAt: post.createdAt,
+            updatedAt: post.updatedAt,
+            author: {
+                id: post.author.id,
+                name: post.author.name
+            },
+            categories: post.categories,
+            tags: post.tags,
+            commentsCount: post._count?.comments || 0,
+            seo: {
+                metaTitle: post.metaTitle,
+                metaDescription: post.metaDescription,
+                keywords: post.metaKeywords,
+                canonicalUrl: post.canonicalUrl,
+                ogTitle: post.ogTitle,
+                ogDescription: post.ogDescription,
+                ogImage: post.ogImage,
+                twitterTitle: post.twitterTitle,
+                twitterDescription: post.twitterDescription,
+                noIndex: post.noIndex,
+                noFollow: post.noFollow,
+            }
+        }));
+
+        res.json({
+            success: true,
+            query,
+            posts: formattedPosts,
+            pagination: result.pagination,
+            site: {
+                name: site.name,
+                domain: site.domain
+            }
+        });
+
+    } catch (error) {
+        console.error('SDK search error:', error);
+        res.status(500).json({
+            error: 'Internal server error',
+            message: 'Failed to search posts'
         });
     }
 });

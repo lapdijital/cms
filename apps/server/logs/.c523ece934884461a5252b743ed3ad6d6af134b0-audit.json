@@ -1,0 +1,250 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 7
+    },
+    "auditLog": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/.c523ece934884461a5252b743ed3ad6d6af134b0-audit.json",
+    "files": [
+        {
+            "date": 1753814628490,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-29.log",
+            "hash": "3b056f215911baeadd5745bb091baee3381df1f16b528fe740cd3e6deb3bf00b"
+        },
+        {
+            "date": 1753815184295,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-29.log.1",
+            "hash": "e90b3ea960aec2c699c70c304960056cf2a0d17d56e6d22313d89b84f807d3f8"
+        },
+        {
+            "date": 1753815190277,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-29.log.2",
+            "hash": "ff1f742a62bcd89e89d7beab732fc6e554232bc21629197fd69969b2b23954e2"
+        },
+        {
+            "date": 1753822870851,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log",
+            "hash": "024238dbd9f1337680ab7a2f9a949d423aded78fb4ddbe9f930278d1e66a55b4"
+        },
+        {
+            "date": 1753824642510,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.1",
+            "hash": "7e7ec37f1df973109082507272aab1a65029f77116e50b1e80da23ea15048fd6"
+        },
+        {
+            "date": 1753824650715,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.2",
+            "hash": "f247e73397dc8eb6381c2c9dd358b75280ad612ae40bf35dbd07bc16f15e7e2a"
+        },
+        {
+            "date": 1753824658825,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.3",
+            "hash": "98e9e21f93f5d825a8f0314f3f6af5aae158d8c4623550e5b7bce01ae519eb3c"
+        },
+        {
+            "date": 1753824666116,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.4",
+            "hash": "6c019feebd9b6000fae50573d531c0c5f14870d3f47dff0b1375d1cab2070903"
+        },
+        {
+            "date": 1753824673536,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.5",
+            "hash": "b9b86da67d1010efa1462e00c3565464e154881fce51396850c9d9a36b24d419"
+        },
+        {
+            "date": 1753824682079,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.6",
+            "hash": "b4685cb0edb502a03a9e4949cb69d5bf3ce1a1ebbd403e6b237c3be201ee48f2"
+        },
+        {
+            "date": 1753824691032,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.7",
+            "hash": "ba6afc099ae262d9c302d51239970dafb2bd3eff9435030f22280757ab3d7f97"
+        },
+        {
+            "date": 1753824699934,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.8",
+            "hash": "5e9184641ebe2e7039d2118bd03e37d431c171e033ada0e3a40c8f769f8251f2"
+        },
+        {
+            "date": 1753824708688,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.9",
+            "hash": "e74bd888d1c42a1ed33f0dbf0c1a37b0545a37270d78e744783b4d6cf6e585b5"
+        },
+        {
+            "date": 1753824715735,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.10",
+            "hash": "31b67b2481debf0ea7872a0769203531f210e0a75a8d61e060e15078c10d1b0c"
+        },
+        {
+            "date": 1753824725250,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.11",
+            "hash": "9f89c5cfc367cbfd37d422e138f025818b801b6f19f9b116c52be663dd47579d"
+        },
+        {
+            "date": 1753824732594,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.12",
+            "hash": "c8380713cc7d10d028964095d091c96e00521523ea9db00876c040d3cb4298fc"
+        },
+        {
+            "date": 1753824740813,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.13",
+            "hash": "bb2514837d0f08acd9aef72e3de4c0eebbfc75021136cd58076cd490aa75664a"
+        },
+        {
+            "date": 1753824751661,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.14",
+            "hash": "235dd31e240eafe0d7d75207e180be9c72a8279cdd00aab5dade051d56a4c66e"
+        },
+        {
+            "date": 1753824760657,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.15",
+            "hash": "2c46f6552f012222e889782f17e4916a0ba53c006eca8d63abf1cacdea1a98ea"
+        },
+        {
+            "date": 1753824768019,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.16",
+            "hash": "c69eefd825328d06666b4d46afaa534ba77eb8d7670b20cbbcebc1d181d23665"
+        },
+        {
+            "date": 1753824776533,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.17",
+            "hash": "5acd288207d2142cb54cdfd5e1ffd661c5ba9825652645063d7384164cb893e4"
+        },
+        {
+            "date": 1753824787950,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.18",
+            "hash": "dab3fe3600eb346b8e652accaf1d8809f12231d8b4a7914953aa8ca7b7167d49"
+        },
+        {
+            "date": 1753824797933,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.19",
+            "hash": "deeb8719f2fe5354b54206e82602f439fed1d1facd2c119e258b185dcb10eaeb"
+        },
+        {
+            "date": 1753824806883,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.20",
+            "hash": "788fbefc636ef6e76c056abda3828baae1a7d60301398cbd93d42cb40187839d"
+        },
+        {
+            "date": 1753824819807,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.21",
+            "hash": "ffaba995c074ad85483dff40e240c824f5b76cbc8b7233b60bb6fe71a425bf5a"
+        },
+        {
+            "date": 1753824827578,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.22",
+            "hash": "93aa7d211728e6fea1482146dde83a8374e5a4e06f36cc861f65d17bdb282bb5"
+        },
+        {
+            "date": 1753824835619,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.23",
+            "hash": "02a84853d4a2f248dfbaeb88c9f8459fcce9d5cc0eb0549f3c5ac32a730cca37"
+        },
+        {
+            "date": 1753824843054,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.24",
+            "hash": "fa8ba9dd86ff00f9d98b50e7a6fe7fa9def73ed987a736ac56375597e42904c5"
+        },
+        {
+            "date": 1753824851753,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.25",
+            "hash": "74e9b965703badacc8ce314ae436e80bccfb2c627c7c11ff92f1e6394e147cf7"
+        },
+        {
+            "date": 1753824861558,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.26",
+            "hash": "d13a2a07fb5085628d0738b88cf5975e0c20b6ce5e39af9870daa404c143ed60"
+        },
+        {
+            "date": 1753824868815,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.27",
+            "hash": "fbe2ad64dde5b2aa1f1a57b11cbe1657327f962aeb7b435161ea81526459f3d4"
+        },
+        {
+            "date": 1753824877281,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.28",
+            "hash": "71e4b9471a732da59b9bcd28e9dd6f8c5675ea603a6e1443bc3d235a345eb523"
+        },
+        {
+            "date": 1753824886028,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.29",
+            "hash": "1af2687447ea330e91f57c5a0a513b8f3ba02e7a18bdd9237034a770234d1878"
+        },
+        {
+            "date": 1753824892551,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.30",
+            "hash": "30ca45d34c3d4bd05af1213a0ac730b2e3c962a3629cac68cc734b029a2e031b"
+        },
+        {
+            "date": 1753824903189,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.31",
+            "hash": "3b66002fe8be498acaaf2b3304cfe6d839d0b3a3766503fbdb445860e90fcb53"
+        },
+        {
+            "date": 1753824912442,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.32",
+            "hash": "7eaa838c2744e7701d8ef37261d1a5c0379729bfa57bfe715751a95d32f7a26f"
+        },
+        {
+            "date": 1753824919320,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.33",
+            "hash": "1ef65b114cb4d07d4b04e5ee6b49015f6fddfc5b8d962a4d001fbd1cec9253f1"
+        },
+        {
+            "date": 1753824926790,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.34",
+            "hash": "6f8b841ad484382903f1c054d3e9af5b3be0ac2f32869c5e9c34cd169fae4306"
+        },
+        {
+            "date": 1753824935748,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.35",
+            "hash": "ef579a97c9087d89b5f2f1c41d7595f48b654e8849b6848156835acdc485c135"
+        },
+        {
+            "date": 1753824944078,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.36",
+            "hash": "46ca7e8a86c3be903f4ee4f6a860877ad3d68f005ac431ee6791e05d2ab7d4e4"
+        },
+        {
+            "date": 1753824951897,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.37",
+            "hash": "657b6cec8a7df974926f81ef5be973ca8f7d06225d3618c6ef545dbd27ccc83e"
+        },
+        {
+            "date": 1753824959248,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.38",
+            "hash": "c387f94405744df2b7a9577823c0a3f606bf1e2ad606c24c43f7d13a5ed345cd"
+        },
+        {
+            "date": 1753824966652,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.39",
+            "hash": "8385025fe5d6bf5e574c7dc8924618bdb638ddfa1a7526ec748b35f626f41e83"
+        },
+        {
+            "date": 1753824973760,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.40",
+            "hash": "60470c4f4546f4b6a6ecb722a47823008b82afc1835ca4cd9c4dac7fa9e87ffe"
+        },
+        {
+            "date": 1753824978882,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.41",
+            "hash": "721437ab73e1dd3e8f7e5cd721c06b83f6911060182ed0bf537039e67f657ae9"
+        },
+        {
+            "date": 1753824984846,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.42",
+            "hash": "3392b6250bd788b833cfce68c5146cccf28c3f7dd65f334cccbafb9d8dab3ce7"
+        },
+        {
+            "date": 1753825425785,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-07-30.log.43",
+            "hash": "6f1dcdb5d50c9d1223b428428b02a3124967b6f715bf36f1e9c854161fd98fcf"
+        },
+        {
+            "date": 1754029135512,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/access-2025-08-01.log",
+            "hash": "9b0dfd1b30842637534959cdaeb5702a1b4cbee0632e2edd8cc9b2af81ac8dbb"
+        }
+    ],
+    "hashType": "sha256"
+}
