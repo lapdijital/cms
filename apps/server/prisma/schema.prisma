@@ -1,0 +1,253 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User Model - Authentication & Authorization
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  role      UserRole @default(USER)
+  avatar    String?
+  bio       String?
+  isActive  Boolean  @default(true)
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  posts     Post[]
+  comments  Comment[]
+  sites     Site[]
+  
+  @@map("users")
+}
+
+// Site Model - User's personal sites
+model Site {
+  id          String   @id @default(cuid())
+  name        String
+  domain      String?  @unique
+  apiKey      String   @unique @default(cuid())
+  description String?
+  isActive    Boolean  @default(true)
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("sites")
+}
+
+// User Roles
+enum UserRole {
+  ADMIN
+  EDITOR
+  USER
+}
+
+// Post Model - Blog posts, pages etc.
+model Post {
+  id          String      @id @default(cuid())
+  title       String
+  slug        String      @unique
+  content     String?
+  excerpt     String?
+  status      PostStatus  @default(DRAFT)
+  type        PostType    @default(POST)
+  
+  // Basic Fields
+  featuredImage   String?
+  readingTime     Int?        // Estimated reading time in minutes
+  viewCount       Int         @default(0)
+  
+  // SEO Fields - Meta Tags
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String?     // Comma separated keywords
+  canonicalUrl    String?     // Canonical URL for duplicate content
+  noIndex         Boolean     @default(false)  // Prevent indexing
+  noFollow        Boolean     @default(false)  // Prevent following links
+  
+  // Open Graph (Facebook/LinkedIn) SEO
+  ogTitle         String?
+  ogDescription   String?
+  ogImage         String?
+  ogType          String?     @default("article")
+  ogUrl           String?
+  
+  // Twitter Card SEO
+  twitterCard     String?     @default("summary_large_image")
+  twitterTitle    String?
+  twitterDescription String?
+  twitterImage    String?
+  twitterSite     String?     // @username for the website
+  twitterCreator  String?     // @username for content creator
+  
+  // Schema.org Structured Data
+  schemaType      String?     @default("Article")
+  breadcrumbs     String?     // JSON string for breadcrumb schema
+  faqSchema       String?     // JSON string for FAQ schema
+  reviewSchema    String?     // JSON string for review schema
+  
+  // Publishing & Scheduling
+  publishedAt     DateTime?
+  scheduledAt     DateTime?   // For scheduled publishing
+  lastModified    DateTime?   // For SEO sitemap
+  
+  // Content Analysis
+  contentScore    Float?      // SEO content quality score (0-100)
+  readabilityScore Float?     // Readability score
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  author     User      @relation(fields: [authorId], references: [id])
+  authorId   String
+  categories Category[]
+  tags       Tag[]
+  comments   Comment[]
+  seoAnalysis SeoAnalysis[]
+  seoKeywords SeoKeyword[]
+  
+  @@map("posts")
+}
+
+// Post Status
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+// Post Type
+enum PostType {
+  POST
+  PAGE
+}
+
+// Category Model
+model Category {
+  id          String @id @default(cuid())
+  name        String @unique
+  slug        String @unique
+  description String?
+  color       String?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  posts Post[]
+  
+  @@map("categories")
+}
+
+// Tag Model
+model Tag {
+  id    String @id @default(cuid())
+  name  String @unique
+  slug  String @unique
+  color String?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  posts Post[]
+  
+  @@map("tags")
+}
+
+// Comment Model
+model Comment {
+  id      String @id @default(cuid())
+  content String
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  post     Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId   String
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+  
+  @@map("comments")
+}
+
+// SEO Analysis Model - Track SEO performance
+model SeoAnalysis {
+  id              String   @id @default(cuid())
+  
+  // SEO Metrics
+  googleRanking   Int?     // Position in Google search results
+  bingRanking     Int?     // Position in Bing search results
+  organicClicks   Int      @default(0)
+  impressions     Int      @default(0)
+  clickThroughRate Float?  // CTR percentage
+  averagePosition Float?   // Average search position
+  
+  // Page Speed Metrics
+  pageSpeedScore  Int?     // Google PageSpeed score (0-100)
+  loadingTime     Float?   // Page loading time in seconds
+  
+  // Technical SEO
+  hasStructuredData Boolean @default(false)
+  mobileFriendly    Boolean @default(false)
+  httpsEnabled      Boolean @default(false)
+  
+  // Content Analysis
+  wordCount         Int?
+  headingStructure  String? // JSON string with H1, H2, H3 analysis
+  internalLinks     Int     @default(0)
+  externalLinks     Int     @default(0)
+  
+  // Analysis Date
+  analyzedAt      DateTime @default(now())
+  
+  // Relations
+  post            Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId          String
+  
+  @@map("seo_analysis")
+}
+
+// SEO Keywords Model - Track keyword performance
+model SeoKeyword {
+  id              String   @id @default(cuid())
+  keyword         String
+  density         Float?   // Keyword density percentage
+  ranking         Int?     // Current ranking for this keyword
+  searchVolume    Int?     // Monthly search volume
+  difficulty      Int?     // Keyword difficulty (0-100)
+  
+  // Timestamps
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  // Relations
+  post            Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId          String
+  
+  @@map("seo_keywords")
+}

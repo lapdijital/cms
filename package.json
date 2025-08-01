@@ -1,20 +1,63 @@
 {
   "name": "lap-cms",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Modern, güçlü ve esnek bir içerik yönetim sistemi. Next.js, Express.js ve PostgreSQL teknolojileri ile geliştirilmiştir.",
+  "keywords": [
+    "cms",
+    "content-management-system",
+    "nextjs",
+    "express",
+    "typescript",
+    "prisma",
+    "postgresql",
+    "blog",
+    "seo",
+    "dashboard",
+    "admin-panel",
+    "turborepo",
+    "monorepo"
+  ],
+  "homepage": "https://github.com/lapdijital/cms#readme",
+  "bugs": {
+    "url": "https://github.com/lapdijital/cms/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lapdijital/cms.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Eren Demirci",
+    "email": "lapdijital@gmail.com",
+    "url": "https://github.com/lapdijital"
+  },
+  "private": false,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "check-types": "turbo run check-types",
+    "clean": "turbo run clean",
+    "test": "turbo run test",
+    "db:generate": "turbo run db:generate",
+    "db:push": "turbo run db:push",
+    "db:migrate": "turbo run db:migrate",
+    "setup": "pnpm install && pnpm db:generate && pnpm db:push"
   },
   "devDependencies": {
+    "@types/node": "^20.11.0",
     "prettier": "^3.6.2",
     "turbo": "^2.5.5",
     "typescript": "5.8.3"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
-    "node": ">=18"
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
   }
 }

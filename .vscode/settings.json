@@ -3,5 +3,14 @@
     {
       "mode": "auto"
     }
+  ],
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "driver": "PostgreSQL",
+      "name": "Lap Dijital",
+      "connectString": "postgresql://lap_cms_user:261019Ae..@localhost:5432/lap_cms?schema=public"
+    }
   ]
 }

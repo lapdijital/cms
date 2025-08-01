@@ -1,135 +1,218 @@
-# Turborepo starter
+# LAP CMS - Content Management System
 
-This Turborepo starter is maintained by the Turborepo core team.
+Modern, güçlü ve esnek bir içerik yönetim sistemi. Next.js, Express.js ve PostgreSQL teknolojileri ile geliştirilmiştir.
 
-## Using this example
+## 🚀 Özellikler
 
-Run the following command:
+- **Modern Teknolojiler**: Next.js 14, Express.js, TypeScript, Prisma ORM
+- **Blog Yönetimi**: Kapsamlı blog yazısı editörü ve yönetimi
+- **SEO Optimizasyonu**: Gerçek zamanlı SEO puanlama sistemi
+- **Kullanıcı Yönetimi**: Rol tabanlı kullanıcı sistemi (Admin/User)
+- **Medya Yönetimi**: MinIO ile güvenli dosya yükleme
+- **Dashboard**: Analitik ve istatistikler
+- **API Integration**: RESTful API desteği
+- **Real-time Editor**: EditorJS ile zengin içerik editörü
 
-```sh
-npx create-turbo@latest
-```
+## 🛠️ Teknoloji Stack
 
-## What's inside?
+### Frontend
+- **Next.js 14** - React framework
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Shadcn/ui** - UI components
+- **EditorJS** - Rich text editor
 
-This Turborepo includes the following packages/apps:
+### Backend
+- **Express.js** - Node.js framework
+- **Prisma ORM** - Database ORM
+- **PostgreSQL** - Database
+- **MinIO** - Object storage
+- **JWT** - Authentication
 
-### Apps and Packages
+### DevOps
+- **Turborepo** - Monorepo management
+- **pnpm** - Package manager
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
-
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## 📁 Proje Yapısı
 
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+cms/
+├── apps/
+│   ├── web/          # Next.js frontend application
+│   └── server/       # Express.js backend API
+├── packages/
+│   ├── eslint-config/     # ESLint configurations
+│   ├── typescript-config/ # TypeScript configurations
+│   └── ui/               # Shared UI components
+└── README.md
 ```
 
-### Develop
+## 🔧 Kurulum
 
-To develop all apps and packages, run the following command:
+### Gereksinimler
+- Node.js 18+ 
+- pnpm
+- PostgreSQL
+- MinIO (opsiyonel, yerel geliştirme için)
 
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+### 1. Depoyu klonlayın
+```bash
+git clone https://github.com/username/cms.git
+cd cms
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+### 2. Bağımlılıkları yükleyin
+```bash
+pnpm install
 ```
 
-### Remote Caching
+### 3. Ortam değişkenlerini ayarlayın
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+**Backend (.env)**
+```bash
+cd apps/server
+cp .env.example .env
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+`.env` dosyasını düzenleyin:
+```env
+PORT=3003
+NODE_ENV=development
+FRONTEND_URL=http://localhost:3000
+AUTH_SECRET="add auth secret key" npx auth secret komutunu kullanarak oluşturabilirsiniz.
+DATABASE_URL="veritabanı bağlantı stringi"
+UPLOAD_KEY="Minio api key"
+UPLOAD_SECRET="Minio api secret"
+UPLOAD_URL="Minio backend urlsi"```
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
+**Frontend (.env.local)**
+```bash
+cd apps/web
+cp .env.example .env.local
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+### 4. Veritabanını oluşturun
+```bash
+cd apps/server
+npx prisma migrate dev
+npx prisma db seed
 ```
 
-## Useful Links
+## 🚀 Geliştirme
 
-Learn more about the power of Turborepo:
+### Tüm servisleri başlatın
+```bash
+pnpm dev
+```
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+Bu komut şunları başlatır:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:3003
+
+### Sadece frontend'i başlatın
+```bash
+pnpm dev --filter=web
+```
+
+### Sadece backend'i başlatın
+```bash
+pnpm dev --filter=server
+```
+
+## 📝 API Endpoints
+
+### Authentication
+- `POST /auth/login` - Giriş yap
+- `POST /auth/logout` - Çıkış yap
+- `GET /auth/me` - Mevcut kullanıcı bilgisi
+
+### Posts
+- `GET /api/posts` - Tüm blog yazıları
+- `POST /api/posts` - Yeni yazı oluştur
+- `PUT /api/posts/:id` - Yazı güncelle
+- `DELETE /api/posts/:id` - Yazı sil
+
+### Users (Admin)
+- `GET /api/users` - Tüm kullanıcılar
+- `POST /api/users` - Yeni kullanıcı oluştur
+- `PUT /api/users/:id` - Kullanıcı güncelle
+- `DELETE /api/users/:id` - Kullanıcı sil
+
+## 🔒 Güvenlik
+
+- JWT tabanlı authentication
+- Role-based access control (RBAC)
+- Input validation ve sanitization
+- Rate limiting
+- CORS protection
+- Helmet.js security headers
+
+## 📊 SEO Özellikleri
+
+- Meta title ve description optimizasyonu
+- Open Graph tags
+- Twitter Card desteği
+- Schema.org markup
+- Canonical URLs
+- Gerçek zamanlı SEO puanlama (100 puan sistemi)
+
+## 🎨 UI/UX
+
+- Responsive tasarım
+- Dark/Light mode desteği
+- Accessible components
+- Modern ve kullanıcı dostu arayüz
+- Real-time feedback
+
+## 📦 Build
+
+### Production build
+```bash
+pnpm build
+```
+
+### Sadece frontend build
+```bash
+pnpm build --filter=web
+```
+
+### Sadece backend build
+```bash
+pnpm build --filter=server
+```
+
+## 🧪 Test
+
+```bash
+pnpm test
+```
+
+## 📄 Lisans
+
+Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasını inceleyiniz.
+
+## 🤝 Katkıda Bulunma
+
+1. Fork edin
+2. Feature branch oluşturun (`git checkout -b feature/AmazingFeature`)
+3. Değişikliklerinizi commit edin (`git commit -m 'Add some AmazingFeature'`)
+4. Branch'inizi push edin (`git push origin feature/AmazingFeature`)
+5. Pull Request oluşturun
+
+## 👨‍💻 Geliştirici
+
+**Eren Demirci**
+- GitHub: [@lapdijital](https://github.com/lapdijital)
+- Email: lapdijital@gmail.com
+
+## 📞 Destek
+
+Herhangi bir sorunuz varsa:
+- Issue açın: [GitHub Issues](https://github.com/lapdijital/cms/issues)
+- Email: lapdijital@gmail.com
+
+---
+
+⭐ Bu projeyi beğendiyseniz yıldız vermeyi unutmayın!

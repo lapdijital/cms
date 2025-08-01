@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/erendemirci/Documents/lap-cms/logs/.8bcd845fe8497e214aba6cde3d646d8a5d0cd8a1-audit.json",
+    "files": [
+        {
+            "date": 1753814460145,
+            "name": "/Users/erendemirci/Documents/lap-cms/logs/error-2025-07-29.log",
+            "hash": "602ffa201e1229540e2cf8db0218c7fe1d0bef4bc7d8e8e9580b6e0a7ae9c9a7"
+        }
+    ],
+    "hashType": "sha256"
+}

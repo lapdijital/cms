@@ -1,0 +1,25 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/.fd9df25d05ee74810a5f598c27ea93f064431f50-audit.json",
+    "files": [
+        {
+            "date": 1753814628489,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/error-2025-07-29.log",
+            "hash": "e44d955e44fc2ada7895775d3dcc3a7ffce5a27474b241dec151cb8ea313f071"
+        },
+        {
+            "date": 1753822870850,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/error-2025-07-30.log",
+            "hash": "c370a3aa418cfbf55b01f722387efc8cb08d395875ab5a0056356463fbdb62ff"
+        },
+        {
+            "date": 1754029135511,
+            "name": "/Users/erendemirci/Documents/lap-cms/apps/server/logs/error-2025-08-01.log",
+            "hash": "99656e51d6454e7b527e75cd7784957fbd7d0eca0c7d732998984f5e686a87b1"
+        }
+    ],
+    "hashType": "sha256"
+}
