@@ -18,11 +18,11 @@ router.get('/lap-cms.js', (req, res) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.removeHeader('Cross-Origin-Resource-Policy'); // Remove restrictive header
-  
+
   res.setHeader('Content-Type', 'application/javascript');
   res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour cache
 
-    const sdkCode = `
+  const sdkCode = `
 /**
  * LAP CMS JavaScript SDK
  * Enables easy integration with LAP CMS API
@@ -48,11 +48,7 @@ router.get('/lap-cms.js', (req, res) => {
       
       this.config.apiKey = options.apiKey;
       this.config.domain = options.domain || window.location.hostname;
-      
-      console.log('LapCMS initialized for domain:', this.config.domain);
-      console.log('LapCMS API key:', this.config.apiKey.substring(0, 10) + '...');
-      console.log('LapCMS base URL:', this.config.baseUrl);
-    },
+      },
     
     /**
      * Make API request with proper headers
@@ -64,15 +60,11 @@ router.get('/lap-cms.js', (req, res) => {
         'x-api-key': this.config.apiKey,
         ...options.headers
       };
-      
-      console.log('LapCMS API Request:', url);
-      console.log('LapCMS Headers:', headers);
-      
+            
       return fetch(url, {
         ...options,
         headers: headers
       }).then(response => {
-        console.log('LapCMS API Response status:', response.status);
         if (!response.ok) {
           throw new Error(\`API Error: \${response.status} \${response.statusText}\`);
         }
@@ -240,7 +232,7 @@ router.get('/lap-cms.js', (req, res) => {
 })();
   `;
 
-    res.send(sdkCode);
+  res.send(sdkCode);
 });
 
 // SDK API endpoints (with CORS validation)
@@ -248,207 +240,207 @@ router.use('/posts', handleCorsOptions, validateDomainCors);
 
 // Get posts for SDK
 router.get('/posts', async (req, res) => {
-    try {
-        const { site } = req;
-        const limit = parseInt(req.query.limit as string) || 10;
-        const page = parseInt(req.query.page as string) || 1;
-        const category = req.query.category as string;
-        const tag = req.query.tag as string;
+  try {
+    const { site } = req;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const page = parseInt(req.query.page as string) || 1;
+    const category = req.query.category as string;
+    const tag = req.query.tag as string;
 
-        // Get published posts using PostsModel
-        const result = await PostsModel.findPublishedPosts(
-            category,
-            tag,
-            page,
-            limit
-        );
+    // Get published posts using PostsModel
+    const result = await PostsModel.findPublishedPosts(
+      category,
+      tag,
+      page,
+      limit
+    );
 
-        // Format posts for SDK response
-        const formattedPosts = result.posts.map(post => ({
-            id: post.id,
-            title: post.title,
-            slug: post.slug,
-            excerpt: post.excerpt,
-            content: post.content ? JSON.parse(post.content) : null,
-            featuredImage: post.featuredImage,
-            publishedAt: post.publishedAt,
-            createdAt: post.createdAt,
-            updatedAt: post.updatedAt,
-            author: {
-                id: post.author.id,
-                name: post.author.name
-            },
-            categories: post.categories,
-            tags: post.tags,
-            commentsCount: post._count?.comments || 0,
-            seo: {
-                metaTitle: post.metaTitle,
-                metaDescription: post.metaDescription,
-                keywords: post.metaKeywords,
-                canonicalUrl: post.canonicalUrl,
-                ogTitle: post.ogTitle,
-                ogDescription: post.ogDescription,
-                ogImage: post.ogImage,
-                twitterTitle: post.twitterTitle,
-                twitterDescription: post.twitterDescription,
-                noIndex: post.noIndex,
-                noFollow: post.noFollow,
-            }
-        }));
+    // Format posts for SDK response
+    const formattedPosts = result.posts.map(post => ({
+      id: post.id,
+      title: post.title,
+      slug: post.slug,
+      excerpt: post.excerpt,
+      content: post.content ? JSON.parse(post.content) : null,
+      featuredImage: post.featuredImage,
+      publishedAt: post.publishedAt,
+      createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
+      author: {
+        id: post.author.id,
+        name: post.author.name
+      },
+      categories: post.categories,
+      tags: post.tags,
+      commentsCount: post._count?.comments || 0,
+      seo: {
+        metaTitle: post.metaTitle,
+        metaDescription: post.metaDescription,
+        keywords: post.metaKeywords,
+        canonicalUrl: post.canonicalUrl,
+        ogTitle: post.ogTitle,
+        ogDescription: post.ogDescription,
+        ogImage: post.ogImage,
+        twitterTitle: post.twitterTitle,
+        twitterDescription: post.twitterDescription,
+        noIndex: post.noIndex,
+        noFollow: post.noFollow,
+      }
+    }));
 
-        res.json({
-            success: true,
-            posts: formattedPosts,
-            pagination: result.pagination,
-            site: {
-                name: site.name,
-                domain: site.domain
-            }
-        });
+    res.json({
+      success: true,
+      posts: formattedPosts,
+      pagination: result.pagination,
+      site: {
+        name: site.name,
+        domain: site.domain
+      }
+    });
 
-    } catch (error) {
-        console.error('SDK posts error:', error);
-        res.status(500).json({
-            error: 'Internal server error',
-            message: 'Failed to fetch posts'
-        });
-    }
+  } catch (error) {
+    console.error('SDK posts error:', error);
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to fetch posts'
+    });
+  }
 });// Get single post for SDK
 router.get('/posts/:id', async (req, res) => {
-    try {
-        const { site } = req;
-        const { id } = req.params;
+  try {
+    const { site } = req;
+    const { id } = req.params;
 
-        // Get published post using PostsModel
-        const post = await PostsModel.findPublishedById(id);
+    // Get published post using PostsModel
+    const post = await PostsModel.findPublishedById(id);
 
-        if (!post) {
-            return res.status(404).json({
-                error: 'Post not found',
-                message: 'The requested post was not found or is not published'
-            });
-        }
-
-        // Format post for SDK response
-        const formattedPost = {
-            id: post.id,
-            title: post.title,
-            slug: post.slug,
-            excerpt: post.excerpt,
-            content: post.content ? JSON.parse(post.content) : null,
-            featuredImage: post.featuredImage,
-            publishedAt: post.publishedAt,
-            createdAt: post.createdAt,
-            updatedAt: post.updatedAt,
-            author: {
-                id: post.author.id,
-                name: post.author.name
-            },
-            categories: post.categories,
-            tags: post.tags,
-            commentsCount: post._count?.comments || 0,
-            seo: {
-                metaTitle: post.metaTitle,
-                metaDescription: post.metaDescription,
-                keywords: post.metaKeywords,
-                canonicalUrl: post.canonicalUrl,
-                ogTitle: post.ogTitle,
-                ogDescription: post.ogDescription,
-                ogImage: post.ogImage,
-                twitterTitle: post.twitterTitle,
-                twitterDescription: post.twitterDescription,
-                noIndex: post.noIndex,
-                noFollow: post.noFollow,
-            }
-        };
-
-        res.json({
-            success: true,
-            post: formattedPost,
-            site: {
-                name: site.name,
-                domain: site.domain
-            }
-        });
-
-    } catch (error) {
-        console.error('SDK post error:', error);
-        res.status(500).json({
-            error: 'Internal server error',
-            message: 'Failed to fetch post'
-        });
+    if (!post) {
+      return res.status(404).json({
+        error: 'Post not found',
+        message: 'The requested post was not found or is not published'
+      });
     }
+
+    // Format post for SDK response
+    const formattedPost = {
+      id: post.id,
+      title: post.title,
+      slug: post.slug,
+      excerpt: post.excerpt,
+      content: post.content ? JSON.parse(post.content) : null,
+      featuredImage: post.featuredImage,
+      publishedAt: post.publishedAt,
+      createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
+      author: {
+        id: post.author.id,
+        name: post.author.name
+      },
+      categories: post.categories,
+      tags: post.tags,
+      commentsCount: post._count?.comments || 0,
+      seo: {
+        metaTitle: post.metaTitle,
+        metaDescription: post.metaDescription,
+        keywords: post.metaKeywords,
+        canonicalUrl: post.canonicalUrl,
+        ogTitle: post.ogTitle,
+        ogDescription: post.ogDescription,
+        ogImage: post.ogImage,
+        twitterTitle: post.twitterTitle,
+        twitterDescription: post.twitterDescription,
+        noIndex: post.noIndex,
+        noFollow: post.noFollow,
+      }
+    };
+
+    res.json({
+      success: true,
+      post: formattedPost,
+      site: {
+        name: site.name,
+        domain: site.domain
+      }
+    });
+
+  } catch (error) {
+    console.error('SDK post error:', error);
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to fetch post'
+    });
+  }
 });
 
 // Search posts for SDK
 router.get('/search', handleCorsOptions, validateDomainCors, async (req, res) => {
-    try {
-        const { site } = req;
-        const query = req.query.q as string;
-        const limit = parseInt(req.query.limit as string) || 10;
-        const page = parseInt(req.query.page as string) || 1;
+  try {
+    const { site } = req;
+    const query = req.query.q as string;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const page = parseInt(req.query.page as string) || 1;
 
-        if (!query) {
-            return res.status(400).json({
-                error: 'Search query is required',
-                message: 'Please provide a search query using the "q" parameter'
-            });
-        }
-
-        // Search published posts using PostsModel
-        const result = await PostsModel.searchPosts(query, page, limit, true);
-
-        // Format posts for SDK response
-        const formattedPosts = result.posts.map(post => ({
-            id: post.id,
-            title: post.title,
-            slug: post.slug,
-            excerpt: post.excerpt,
-            content: post.content ? JSON.parse(post.content) : null,
-            featuredImage: post.featuredImage,
-            publishedAt: post.publishedAt,
-            createdAt: post.createdAt,
-            updatedAt: post.updatedAt,
-            author: {
-                id: post.author.id,
-                name: post.author.name
-            },
-            categories: post.categories,
-            tags: post.tags,
-            commentsCount: post._count?.comments || 0,
-            seo: {
-                metaTitle: post.metaTitle,
-                metaDescription: post.metaDescription,
-                keywords: post.metaKeywords,
-                canonicalUrl: post.canonicalUrl,
-                ogTitle: post.ogTitle,
-                ogDescription: post.ogDescription,
-                ogImage: post.ogImage,
-                twitterTitle: post.twitterTitle,
-                twitterDescription: post.twitterDescription,
-                noIndex: post.noIndex,
-                noFollow: post.noFollow,
-            }
-        }));
-
-        res.json({
-            success: true,
-            query,
-            posts: formattedPosts,
-            pagination: result.pagination,
-            site: {
-                name: site.name,
-                domain: site.domain
-            }
-        });
-
-    } catch (error) {
-        console.error('SDK search error:', error);
-        res.status(500).json({
-            error: 'Internal server error',
-            message: 'Failed to search posts'
-        });
+    if (!query) {
+      return res.status(400).json({
+        error: 'Search query is required',
+        message: 'Please provide a search query using the "q" parameter'
+      });
     }
+
+    // Search published posts using PostsModel
+    const result = await PostsModel.searchPosts(query, page, limit, true);
+
+    // Format posts for SDK response
+    const formattedPosts = result.posts.map(post => ({
+      id: post.id,
+      title: post.title,
+      slug: post.slug,
+      excerpt: post.excerpt,
+      content: post.content ? JSON.parse(post.content) : null,
+      featuredImage: post.featuredImage,
+      publishedAt: post.publishedAt,
+      createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
+      author: {
+        id: post.author.id,
+        name: post.author.name
+      },
+      categories: post.categories,
+      tags: post.tags,
+      commentsCount: post._count?.comments || 0,
+      seo: {
+        metaTitle: post.metaTitle,
+        metaDescription: post.metaDescription,
+        keywords: post.metaKeywords,
+        canonicalUrl: post.canonicalUrl,
+        ogTitle: post.ogTitle,
+        ogDescription: post.ogDescription,
+        ogImage: post.ogImage,
+        twitterTitle: post.twitterTitle,
+        twitterDescription: post.twitterDescription,
+        noIndex: post.noIndex,
+        noFollow: post.noFollow,
+      }
+    }));
+
+    res.json({
+      success: true,
+      query,
+      posts: formattedPosts,
+      pagination: result.pagination,
+      site: {
+        name: site.name,
+        domain: site.domain
+      }
+    });
+
+  } catch (error) {
+    console.error('SDK search error:', error);
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to search posts'
+    });
+  }
 });
 
 export default router;
