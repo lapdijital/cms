@@ -189,7 +189,7 @@ export default function SiteSettingsPage() {
     if (!user?.site) return ""
     
     return `<!-- LAP CMS - Sadece Veri Kullanımı -->
-    <script src="${typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3001'}/api/sdk/lap-cms.js"></script>
+    <script src="https://apicms.lapdijital.com/api/sdk/lap-cms.js"></script>
     <script>
     LapCMS.init({
         apiKey: '${user.site.apiKey}',
